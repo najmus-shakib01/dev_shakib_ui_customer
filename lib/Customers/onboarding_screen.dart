@@ -1,90 +1,240 @@
 import 'package:flutter/material.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+
+  final List<_OnboardModel> pages = [
+    _OnboardModel(
+      title: "Share Your Experience",
+      description:
+          "Share your experience working with\n"
+          "great companies and earn exclusive\n"
+          "rewards for your valuable feedback.",
+    ),
+    _OnboardModel(
+      title: "Earn Rewards",
+      description:
+          "Complete simple tasks and collect\n"
+          "exclusive rewards for your opinions.",
+    ),
+    _OnboardModel(
+      title: "Trusted Community",
+      description:
+          "Join a trusted community of\n"
+          "professionals around the world.",
+    ),
+    _OnboardModel(
+      title: "Start Your Journey",
+      description:
+          "Your experience matters — let’s begin\n"
+          "your journey together today.",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: const [
-              SizedBox(height: 24),
-              _IllustrationSection(),
-              SizedBox(height: 32),
-              _TitleAndDescriptionSection(),
-              Spacer(),
-              _PagerIndicator(),
-              SizedBox(height: 32),
-              _ButtonsSection(),
-              SizedBox(height: 24),
+        child: Column(
+          children: [
+            const SizedBox(height: 24),
+
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: pages.length,
+                onPageChanged: (index) {
+                  setState(() => _currentIndex = index);
+                },
+                itemBuilder: (context, index) {
+                  return _OnboardingPage(
+                    title: pages[index].title,
+                    description: pages[index].description,
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            _PagerIndicator(
+              count: pages.length,
+              activeIndex: _currentIndex,
+              onDotTap: (index) {
+                _pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              },
+            ),
+
+            const SizedBox(height: 20),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: [
+                  _PrimaryButton(
+                    label: _currentIndex == pages.length - 1
+                        ? "Skip Tour"
+                        : "Get Started",
+                    onPressed: () {
+                      if (_currentIndex < pages.length - 1) {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      } else {}
+                    },
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  _SecondaryButton(
+                    label: "Skip Tour",
+                    onPressed: () {
+                      _pageController.jumpToPage(pages.length - 1);
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 24),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PagerIndicator extends StatelessWidget {
+  final int count;
+  final int activeIndex;
+  final Function(int) onDotTap;
+
+  const _PagerIndicator({
+    required this.count,
+    required this.activeIndex,
+    required this.onDotTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        count,
+        (index) => GestureDetector(
+          onTap: () => onDotTap(index),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: _Dot(isActive: index == activeIndex),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  final bool isActive;
+
+  const _Dot({required this.isActive});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: isActive ? 12 : 10,
+      height: isActive ? 12 : 10,
+      decoration: BoxDecoration(
+        color: isActive
+            ? _OnboardingColors.primaryOrange
+            : _OnboardingColors.inactiveDot,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+class _OnboardingPage extends StatelessWidget {
+  final String title;
+  final String description;
+
+  const _OnboardingPage({required this.title, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          const SizedBox(height: 40),
+
+          Container(
+            height: 240,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: const Center(child: FlutterLogo(size: 100)),
+          ),
+
+          const SizedBox(height: 40),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(title, style: _OnboardingTextStyles.title),
+              const SizedBox(height: 16),
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: _OnboardingTextStyles.body,
+              ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
-class _IllustrationSection extends StatelessWidget {
-  const _IllustrationSection();
+class _OnboardModel {
+  final String title;
+  final String description;
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 260,
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-          ),
-          padding: const EdgeInsets.all(24),
-          child: const FlutterLogo(size: 120),
-        ),
-      ),
-    );
-  }
+  _OnboardModel({required this.title, required this.description});
 }
 
-class _TitleAndDescriptionSection extends StatelessWidget {
-  const _TitleAndDescriptionSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text('Share Your Experience', style: _OnboardingTextStyles.title),
-        const SizedBox(height: 16),
-        Text(
-          'Share your experience working with\n'
-          'great companies and earn exclusive\n'
-          'rewards for your valuable feedback.',
-          textAlign: TextAlign.center,
-          style: _OnboardingTextStyles.body.copyWith(fontSize: 19),
-        ),
-      ],
-    );
-  }
+class _OnboardingColors {
+  static const Color background = Color(0xFFF5F5F5);
+  static const Color primaryOrange = Color(0xFFFF6A00);
+  static const Color inactiveDot = Color(0xFFFFD4A8);
 }
 
-class _ButtonsSection extends StatelessWidget {
-  const _ButtonsSection();
+class _OnboardingTextStyles {
+  static const TextStyle title = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _PrimaryButton(label: 'Get Started', onPressed: () {}),
-        const SizedBox(height: 16),
-        _SecondaryButton(label: 'Skip Tour', onPressed: () {}),
-      ],
-    );
-  }
+  static const TextStyle body = TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    color: Colors.black87,
+  );
 }
 
 class _PrimaryButton extends StatelessWidget {
@@ -97,17 +247,23 @@ class _PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 52,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: _OnboardingColors.primaryOrange,
-          elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
           ),
         ),
-        child: Text(label, style: _OnboardingTextStyles.primaryButton),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
@@ -123,100 +279,27 @@ class _SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 52,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          backgroundColor: _OnboardingColors.secondaryBackground,
           side: const BorderSide(
             color: _OnboardingColors.primaryOrange,
-            width: 1,
+            width: 1.4,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
           ),
         ),
-        child: Text(label, style: _OnboardingTextStyles.secondaryButton),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: _OnboardingColors.primaryOrange,
+          ),
+        ),
       ),
     );
   }
-}
-
-class _PagerIndicator extends StatelessWidget {
-  const _PagerIndicator();
-
-  @override
-  Widget build(BuildContext context) {
-    const int totalDots = 4;
-    const int activeIndex = 0;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(totalDots, (index) {
-        final bool isActive = index == activeIndex;
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-          child: _Dot(isActive: isActive),
-        );
-      }),
-    );
-  }
-}
-
-class _Dot extends StatelessWidget {
-  final bool isActive;
-
-  const _Dot({required this.isActive});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      width: 10,
-      height: 10,
-      decoration: BoxDecoration(
-        color: isActive
-            ? _OnboardingColors.primaryOrange
-            : _OnboardingColors.inactiveDot,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-}
-
-class _OnboardingColors {
-  // ignore: unused_field
-  static const Color background = Color(0xFFFFF7EB);
-  static const Color primaryOrange = Color(0xFFFF6A00);
-  static const Color secondaryBackground = Color(0xFFFFE4C5);
-  static const Color titleText = Color(0xFF161616);
-  static const Color bodyText = Color(0xFF555555);
-  static const Color inactiveDot = Color(0xFFFFD4A8);
-}
-
-class _OnboardingTextStyles {
-  static const TextStyle title = TextStyle(
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
-    color: _OnboardingColors.titleText,
-    height: 1.3,
-  );
-
-  static const TextStyle body = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: _OnboardingColors.bodyText,
-    height: 1.6,
-  );
-
-  static const TextStyle primaryButton = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    color: Colors.white,
-  );
-
-  static const TextStyle secondaryButton = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    color: _OnboardingColors.primaryOrange,
-  );
 }
