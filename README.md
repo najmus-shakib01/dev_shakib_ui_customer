@@ -1,4 +1,4 @@
-<h1 style="color: blue; font: bold;">Customer</h1>
+<h1 style="color: blue; font: bold; fint-size: 50px;">Customer</h1>
 
 # Referral Program Registration Screen
 
