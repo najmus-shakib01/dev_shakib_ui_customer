@@ -5,7 +5,8 @@
 // import 'package:dev_shakib_ui/Customers/stripe_connect_payment_setup.dart';
 // import 'package:dev_shakib_ui/Customers/referral_contact_section_screen.dart';
 // import 'package:dev_shakib_ui/Customers/referral_composition_screen.dart';
-import 'package:dev_shakib_ui/Customers/referral_preview_and_send_screen.dart';
+// import 'package:dev_shakib_ui/Customers/referral_preview_and_send_screen.dart';
+import 'package:dev_shakib_ui/Customers/help_and_FAQ_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +28,8 @@ class ReferableApp extends StatelessWidget {
       // home: const StripeConnectPaymentSetupScreen(),
       // home: const ReferralContactSectionScreen(),
       // home: const ReferralCompositionScreen(),
-      home: const ReferralPreviewAndSendScreen(),
+      // home: const ReferralPreviewAndSendScreen(),
+      home: const HelpAndFaqScreen(),
     );
   }
 }
