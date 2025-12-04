@@ -1,4 +1,4 @@
-// import 'customers/referral_program_registration_screen.dart';
+import 'customers/referral_program_registration_screen.dart';
 // import 'package:dev_shakib_ui/Customers/Terms_Service.dart';
 // import 'package:dev_shakib_ui/Customers/onboarding_screen.dart';
 // import 'package:dev_shakib_ui/Customers/profile_completion_form.dart';
@@ -8,8 +8,9 @@
 // import 'package:dev_shakib_ui/Customers/referral_preview_and_send_screen.dart';
 // import 'package:dev_shakib_ui/Customers/help_and_FAQ_screen.dart';
 // import 'package:dev_shakib_ui/Customers/notification_settings.dart';
-import 'package:dev_shakib_ui/Customers/company_insight.dart';
+// import 'package:dev_shakib_ui/Customers/company_insight.dart';
 import 'package:flutter/material.dart';
+
 
 void main() {
   runApp(const ReferableApp());
@@ -23,7 +24,7 @@ class ReferableApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Customer Referral App',
-      // home: const ReferralProgramRegistrationScreen(),
+      home: const ReferralProgramRegistrationScreen(),
       // home: const TermsOfServiceScreen(),
       // home: const OnboardingScreen(),
       // home: const ProfileCompletionForm(),
@@ -33,7 +34,7 @@ class ReferableApp extends StatelessWidget {
       // home: const ReferralPreviewAndSendScreen(),
       // home: const HelpAndFaqScreen(),
       // home: const NotificationSettingsScreen(),
-      home: const CompanyInsightPage(),
+      // home: const CompanyInsightPage(),
     );
   }
 }

@@ -6,9 +6,7 @@ class ReferralProgramRegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFF8F5EF,
-      ), 
+      backgroundColor: const Color(0xFFF8F5EF),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -33,17 +31,15 @@ class ReferralProgramRegistrationScreen extends StatelessWidget {
 
   Widget _buildHeader() {
     return Column(
-      children: const [
-        Text(
-          "Referable",
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+      children: [
+        Image.asset(
+          'assets/referral_program_registration_screen/image/referable_logo.png',
+          height: 40,
+          fit: BoxFit.contain,
+          filterQuality: FilterQuality.high,
         ),
-        SizedBox(height: 6),
-        Text(
+        const SizedBox(height: 10),
+        const Text(
           "Join our referral community",
           style: TextStyle(fontSize: 16, color: Colors.black54),
         ),
@@ -62,38 +58,39 @@ class _InviteBanner extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF3E4), 
-        borderRadius: BorderRadius.circular(14),
-
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08), 
-            blurRadius: 12,
-            spreadRadius: 1,
-            offset: const Offset(0, 4), 
-          ),
-        ],
+        color: const Color.fromARGB(255, 245, 229, 209),
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("🎁  ", style: TextStyle(fontSize: 20)),
-              Text(
-                "You've been invited!",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFFEB5A1E),
-                  fontWeight: FontWeight.w700,
+              Image.asset(
+                'assets/referral_program_registration_screen/icon/gift.png',
+                width: 28,
+                height: 28,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+              ),
+              const SizedBox(width: 10),
+              const Expanded(
+                child: Text(
+                  "You've been invited!",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFFEB5A1E),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             "Complete your registration to start earning rewards through our referral program.",
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(fontSize: 14, color: Colors.black87, height: 1.4),
           ),
         ],
       ),
@@ -143,7 +140,7 @@ class _RegistrationFormState extends State<_RegistrationForm> {
               Checkbox(
                 value: agree,
                 onChanged: (v) => setState(() => agree = v ?? false),
-                activeColor: const Color(0xFFEB5A1E), 
+                activeColor: const Color(0xFFEB5A1E),
               ),
               Expanded(
                 child: Wrap(
@@ -186,7 +183,7 @@ class _FieldLabel extends StatelessWidget {
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
-        color: Color(0xFF083A2F), 
+        color: Color(0xFF083A2F),
       ),
     );
   }
@@ -233,7 +230,7 @@ class _SubmitButton extends StatelessWidget {
       height: 54,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFEB5A1E), 
+          backgroundColor: const Color(0xFFEB5A1E),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
@@ -263,7 +260,7 @@ class _AlreadyHaveAccountButton extends StatelessWidget {
       height: 54,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFFFE8D9), 
+          backgroundColor: const Color(0xFFFFE8D9),
           foregroundColor: const Color(0xFFEB5A1E),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
