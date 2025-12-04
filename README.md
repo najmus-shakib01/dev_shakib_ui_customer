@@ -33,12 +33,12 @@ A new Flutter project.
 <img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/5a63a7bf-28ea-41f0-bd27-c61ef6652e36" />
 <img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/5368c7cc-3512-46d3-90cc-f4cf0431a25f" />
 
-# Stripe Connect PaymentSetup Screen
+# Stripe Connect Payment Setup Screen
 
 A new Flutter project.
 
 ## Output
-<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/a5a490fe-78ce-4124-9277-0f0ed0c16fab" />
+<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/ca9fedd4-865b-478f-bbf7-ecf99dd839d7" />
 <img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/96053ad1-2c51-4a66-93ca-e85de4474e5c" />
 
 # Referral Contact Section Screen
