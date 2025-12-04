@@ -42,7 +42,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+   backgroundColor: const Color(0xFFFFFDF6),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -184,10 +185,13 @@ class _OnboardingPage extends StatelessWidget {
 
           Container(
             height: 240,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+            child: Center(
+              child: Image.asset(
+                "assets/onboarding_screen/image/men.png", 
+                fit: BoxFit.contain,
+              ),
             ),
-            child: const Center(child: FlutterLogo(size: 100)),
           ),
 
           const SizedBox(height: 40),

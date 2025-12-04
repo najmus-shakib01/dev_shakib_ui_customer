@@ -29,3 +29,5 @@ flutter:
     - assets/referral_program_registration_screen/image/
     - assets/terms_service/icon/
     - assets/terms_service/image/
+    - assets/onboarding_screen/icon/
+    - assets/onboarding_screen/image/
