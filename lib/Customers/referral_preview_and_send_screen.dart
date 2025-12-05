@@ -6,19 +6,44 @@ class ReferralPreviewAndSendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(
-        255,
-        242,
-        239,
-        231,
+      backgroundColor: const Color(0xFFF2EFE7),
+
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(72),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8F4E9),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black.withOpacity(0.12),
+                width: 1,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "assets/referral_preview_and_send_screen/image/referable_logo.png",
+                height: 32,
+              ),
+              Image.asset(
+                "assets/referral_preview_and_send_screen/icon/menu.png",
+                height: 26,
+              ),
+            ],
+          ),
+        ),
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              _HeaderSection(),
+              _HeaderTexts(),
               SizedBox(height: 20),
               _MainWhiteCard(),
               SizedBox(height: 30),
@@ -29,12 +54,47 @@ class ReferralPreviewAndSendScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      bottomNavigationBar: Container(
+        height: 85,
+        decoration: const BoxDecoration(color: Colors.white),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _navItem(
+                "assets/referral_preview_and_send_screen/icon/home.png",
+                "Home",
+                false,
+              ),
+              _navItem(
+                "assets/referral_preview_and_send_screen/icon/leaderboard.png",
+                "Leaderboard",
+                false,
+              ),
+              _activeReferItem(),
+              _navItem(
+                "assets/referral_preview_and_send_screen/icon/earnings.png",
+                "Earnings",
+                false,
+              ),
+              _navItem(
+                "assets/referral_preview_and_send_screen/icon/profile.png",
+                "Profile",
+                false,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-class _HeaderSection extends StatelessWidget {
-  const _HeaderSection();
+class _HeaderTexts extends StatelessWidget {
+  const _HeaderTexts();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -84,7 +144,7 @@ class _MainWhiteCard extends StatelessWidget {
           SizedBox(height: 20),
           _ConvertSolarBlock(),
           SizedBox(height: 20),
-          _LargePreviewIcon(),
+          _LargePreviewImage(),
         ],
       ),
     );
@@ -98,26 +158,16 @@ class _ReceiverSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // initials avatar
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade400,
-            shape: BoxShape.circle,
-          ),
-          child: const Center(
-            child: Text(
-              "JD",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
+        ClipOval(
+          child: Image.asset(
+            "assets/referral_preview_and_send_screen/image/james_davis.png",
+            height: 56,
+            width: 56,
+            fit: BoxFit.cover,
           ),
         ),
         const SizedBox(width: 12),
+
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
@@ -147,13 +197,6 @@ class _GrayMessageBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xffF0F0F0),
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: const Text(
         "Hi James, I just got new Solar Panels installed by Convert Solar and they "
@@ -173,34 +216,23 @@ class _ConvertSolarBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(
-          255,
-          242,
-          239,
-          231,
-        ),
+        color: const Color(0xFFF2EFE7),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              "assets/referral_preview_and_send_screen/icon/solar_icon.png",
+              height: 52,
+              width: 52,
+              fit: BoxFit.cover,
             ),
-            child: const Icon(Icons.wb_sunny, size: 32, color: Colors.orange),
           ),
           const SizedBox(width: 16),
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
@@ -221,8 +253,8 @@ class _ConvertSolarBlock extends StatelessWidget {
   }
 }
 
-class _LargePreviewIcon extends StatelessWidget {
-  const _LargePreviewIcon();
+class _LargePreviewImage extends StatelessWidget {
+  const _LargePreviewImage();
 
   @override
   Widget build(BuildContext context) {
@@ -231,21 +263,25 @@ class _LargePreviewIcon extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(18),
-          child: Container(
+          child: Image.asset(
+            "assets/referral_preview_and_send_screen/image/house_solar.png",
             height: 210,
             width: double.infinity,
-            color: Colors.grey.shade300,
-            child: const Center(
-              child: Icon(Icons.home_work, size: 130, color: Colors.grey),
-            ),
+            fit: BoxFit.cover,
           ),
         ),
+
         const SizedBox(height: 8),
+
         Row(
-          children: const [
-            Icon(Icons.attachment, color: Colors.grey),
-            SizedBox(width: 6),
-            Text(
+          children: [
+            Image.asset(
+              "assets/referral_preview_and_send_screen/icon/copy.png",
+              height: 22,
+            ),
+            const SizedBox(width: 6),
+
+            const Text(
               "1 attachment",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
@@ -276,25 +312,28 @@ class _ReferralDetailsCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Row(
             children: [
-              Text(
+              const Text(
                 "Referral details",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 8), 
-              Icon(Icons.edit_square, size: 24, color: Color(0xff635BFF)),
+              const SizedBox(width: 8),
+              Image.asset(
+                "assets/referral_preview_and_send_screen/icon/edit.png",
+                height: 26,
+              ),
             ],
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
-          _DetailRow(label: "Company", value: "Convert Solar"),
-          _DetailRow(label: "Referral Name", value: "James Davis"),
-          _DetailRow(label: "Email", value: "jw@gmail.com"),
-          _DetailRow(label: "Phone", value: "+1 (555) 123-4567"),
-          _DetailRow(label: "Address", value: "Jacksonville, FL"),
+          const _DetailRow(label: "Company", value: "Convert Solar"),
+          const _DetailRow(label: "Referral Name", value: "James Davis"),
+          const _DetailRow(label: "Email", value: "jw@gmail.com"),
+          const _DetailRow(label: "Phone", value: "+1 (555) 123-4567"),
+          const _DetailRow(label: "Address", value: "Jacksonville, FL"),
         ],
       ),
     );
@@ -359,13 +398,61 @@ class _SendMessageButton extends StatelessWidget {
 
         const SizedBox(height: 8),
 
-        const Center(
-          child: Text(
-            "This will open your phone's messaging app",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
+        const Text(
+          "This will open your phone's messaging app",
+          style: TextStyle(fontSize: 14, color: Colors.grey),
         ),
       ],
     );
   }
+}
+
+Widget _navItem(String icon, String label, bool active) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(icon, height: 26),
+      const SizedBox(height: 4),
+      Text(
+        label,
+        style: TextStyle(
+          fontSize: 13,
+          color: active ? const Color(0xff635BFF) : Colors.black87,
+          fontWeight: active ? FontWeight.bold : FontWeight.w500,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _activeReferItem() {
+  return Column(
+    children: [
+      Container(
+        height: 55,
+        width: 55,
+        decoration: const BoxDecoration(
+          color: Color(0xffFF6A00),
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Image.asset(
+            "assets/referral_preview_and_send_screen/icon/refer.png",
+            height: 30,
+          ),
+        ),
+      ),
+
+      const SizedBox(height: 4),
+
+      const Text(
+        "Refer",
+        style: TextStyle(
+          fontSize: 13,
+          color: Color(0xffFF6A00),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  );
 }

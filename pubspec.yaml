@@ -35,3 +35,5 @@ flutter:
     - assets/referral_contact_section_screen/image/
     - assets/referral_composition_screen/icon/
     - assets/referral_composition_screen/image/
+    - assets/referral_preview_and_send_screen/icon/
+    - assets/referral_preview_and_send_screen/image/
