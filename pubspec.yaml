@@ -41,3 +41,5 @@ flutter:
     - assets/help_and_FAQ_screen/image/
     - assets/notification_settings/icon/
     - assets/notification_settings/image/
+    - assets/company_insight/icon/
+    - assets/company_insight/image/

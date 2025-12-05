@@ -7,8 +7,8 @@
 // import 'package:dev_shakib_ui/Customers/referral_composition_screen.dart';
 // import 'package:dev_shakib_ui/Customers/referral_preview_and_send_screen.dart';
 // import 'package:dev_shakib_ui/Customers/help_and_FAQ_screen.dart';
-import 'package:dev_shakib_ui/Customers/notification_settings.dart';
-// import 'package:dev_shakib_ui/Customers/company_insight.dart';
+// import 'package:dev_shakib_ui/Customers/notification_settings.dart';
+import 'package:dev_shakib_ui/Customers/company_insight.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,8 +32,8 @@ class ReferableApp extends StatelessWidget {
       // home: const ReferralCompositionScreen(),
       // home: const ReferralPreviewAndSendScreen(),
       // home: const HelpAndFaqScreen(),
-      home: const NotificationSettingsScreen(),
-      // home: const CompanyInsightPage(),
+      // home: const NotificationSettingsScreen(),
+      home: const CompanyInsightPage(),
     );
   }
 }

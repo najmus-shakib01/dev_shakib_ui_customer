@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const background = Color(0xFFFFF8EC); 
+  static const background = Color(0xFFFFF8EC);
   static const cardBackground = Colors.white;
   static const primaryOrange = Color(0xFFFF7A00);
-  static const secondaryOrange = Color(0xFFFF9500); 
-  static const softOrangeButton = Color(0xFFFFE8D2); 
+  static const secondaryOrange = Color(0xFFFF9500);
+  static const softOrangeButton = Color(0xFFFFE8D2);
   static const textPrimary = Color(0xFF141414);
   static const textSecondary = Color(0xFF555555);
-  static const earningsBlue = Color(0xFF1F6BFF); 
-  static const earningsOrangeLine = Color(0xFFFFA53A); 
-  static const positiveGreen = Color(0xFF15A24A); 
+  static const earningsBlue = Color(0xFF1F6BFF);
+  static const earningsOrangeLine = Color(0xFFFFA53A);
+  static const positiveGreen = Color(0xFF15A24A);
   static const divider = Color(0xFFE0E0E0);
 }
 
 class AppSpacing {
-  static const screenPadding = EdgeInsets.symmetric(horizontal: 24, vertical: 16);
+  static const screenPadding = EdgeInsets.symmetric(
+    horizontal: 24,
+    vertical: 16,
+  );
   static const cardPadding = EdgeInsets.all(20);
   static const sectionSpacing = SizedBox(height: 24);
   static const itemSpacing = SizedBox(height: 16);
 }
 
-/// ---------- Data Models ----------
 class ReferralCampaign {
   final String title;
   final String dateRange;
@@ -36,41 +38,67 @@ class ReferralCampaign {
   });
 }
 
-/// ---------- Screen Root ----------
 class CompanyInsightPage extends StatelessWidget {
   const CompanyInsightPage({super.key});
 
   List<ReferralCampaign> get _campaigns => const [
-        ReferralCampaign(
-          title: 'Summer Referral Drive',
-          dateRange: 'Jun 1 - Aug 31, 2025',
-          earnings: '\$450',
-          referrals: 9,
-        ),
-        ReferralCampaign(
-          title: 'Spring Tech Conference',
-          dateRange: 'Mar 15 - May 20, 2025',
-          earnings: '\$325',
-          referrals: 6,
-        ),
-        ReferralCampaign(
-          title: 'New Year Kickoff',
-          dateRange: 'Jan 1 - Feb 28, 2025',
-          earnings: '\$275',
-          referrals: 5,
-        ),
-        ReferralCampaign(
-          title: 'Summer Referral Drive',
-          dateRange: 'Nov 15 - Dec 31, 2025',
-          earnings: '\$190',
-          referrals: 4,
-        ),
-      ];
+    ReferralCampaign(
+      title: 'Summer Referral Drive',
+      dateRange: 'Jun 1 - Aug 31, 2025',
+      earnings: '\$450',
+      referrals: 9,
+    ),
+    ReferralCampaign(
+      title: 'Spring Tech Conference',
+      dateRange: 'Mar 15 - May 20, 2025',
+      earnings: '\$325',
+      referrals: 6,
+    ),
+    ReferralCampaign(
+      title: 'New Year Kickoff',
+      dateRange: 'Jan 1 - Feb 28, 2025',
+      earnings: '\$275',
+      referrals: 5,
+    ),
+    ReferralCampaign(
+      title: 'Summer Referral Drive',
+      dateRange: 'Nov 15 - Dec 31, 2025',
+      earnings: '\$190',
+      referrals: 4,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(72),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8F4E9),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black.withOpacity(0.12),
+                width: 1,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "assets/company_insight/image/referable_logo.png",
+                height: 32,
+              ),
+              Image.asset("assets/company_insight/icon/menu.png", height: 26),
+            ],
+          ),
+        ),
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: AppSpacing.screenPadding.copyWith(bottom: 32),
@@ -88,11 +116,80 @@ class CompanyInsightPage extends StatelessWidget {
           ),
         ),
       ),
+
+      bottomNavigationBar: Container(
+        height: 85,
+        decoration: const BoxDecoration(color: Colors.white),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _navItem("assets/company_insight/icon/home.png", "Home", false),
+              _navItem(
+                "assets/company_insight/icon/leaderboard.png",
+                "Leaderboard",
+                false,
+              ),
+              _activeReferItem(),
+              _navItem(
+                "assets/company_insight/icon/earnings.png",
+                "Earnings",
+                false,
+              ),
+              _navItem(
+                "assets/company_insight/icon/profile.png",
+                "Profile",
+                false,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-/// ---------- Header ----------
+Widget _navItem(String icon, String label, bool isActive) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(
+        icon,
+        height: 26,
+        color: isActive ? AppColors.secondaryOrange : null,
+      ),
+      const SizedBox(height: 4),
+      Text(
+        label,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: isActive ? AppColors.secondaryOrange : AppColors.textSecondary,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _activeReferItem() {
+  return Container(
+    height: 56,
+    width: 56,
+    decoration: const BoxDecoration(
+      color: AppColors.secondaryOrange,
+      shape: BoxShape.circle,
+    ),
+    child: Center(
+      child: Image.asset(
+        "assets/company_insight/icon/refer.png",
+        height: 28,
+        color: Colors.white,
+      ),
+    ),
+  );
+}
+
 class _HeaderSection extends StatelessWidget {
   const _HeaderSection();
 
@@ -112,39 +209,49 @@ class _HeaderSection extends StatelessWidget {
         SizedBox(height: 6),
         Text(
           'View your completed referrals and earnings',
-          style: TextStyle(
-            fontSize: 14,
-            color: AppColors.textSecondary,
-            height: 1.4,
-          ),
+          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
         ),
       ],
     );
   }
 }
 
-/// ---------- Total Earnings Card ----------
 class TotalEarningsCard extends StatelessWidget {
   const TotalEarningsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return _BaseCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _CardHeaderRow(),
-          const SizedBox(height: 16),
-          const _EarningsRow(),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 170,
-            width: double.infinity,
-            child: CustomPaint(
-              painter: _EarningsChartPainter(),
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFDF8),
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 12,
+            offset: Offset(0, 4),
           ),
         ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _CardHeaderRow(),
+            const SizedBox(height: 16),
+            const _EarningsRow(),
+            const SizedBox(height: 20),
+
+            Container(
+              height: 165,
+              width: double.infinity,
+              decoration: BoxDecoration(color: const Color(0xFFF3F1EC)),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: CustomPaint(painter: _EarningsChartPainter()),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -169,11 +276,6 @@ class _CardHeaderRow extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {},
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(0, 0),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
           child: const Text(
             'View Details',
             style: TextStyle(
@@ -201,7 +303,6 @@ class _EarningsRow extends StatelessWidget {
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            letterSpacing: 0.5,
             color: AppColors.textPrimary,
           ),
         ),
@@ -222,87 +323,76 @@ class _EarningsRow extends StatelessWidget {
   }
 }
 
-/// Simple custom painter to mimic the blue & orange lines of the chart.
 class _EarningsChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint axisPaint = Paint()
-      ..color = AppColors.divider
-      ..strokeWidth = 1.2;
+    final axisPaint = Paint()
+      ..color = const Color.fromARGB(255, 244, 239, 239)
+      ..strokeWidth = 1.4;
 
-    // X-axis
     canvas.drawLine(
-      Offset(0, size.height - 4),
-      Offset(size.width, size.height - 4),
+      Offset(0, size.height - 6),
+      Offset(size.width, size.height - 6),
       axisPaint,
     );
 
-    final Path bluePath = Path();
-    final Path orangePath = Path();
-
-    // Sample points (relative) tuned by eye to look like screenshot (approx)
-    final pointsBlue = <Offset>[
-      Offset(size.width * 0.02, size.height * 0.70),
-      Offset(size.width * 0.18, size.height * 0.62),
-      Offset(size.width * 0.32, size.height * 0.55),
-      Offset(size.width * 0.46, size.height * 0.47),
-      Offset(size.width * 0.60, size.height * 0.40),
-      Offset(size.width * 0.75, size.height * 0.30),
-      Offset(size.width * 0.90, size.height * 0.33),
-    ];
-
-    final pointsOrange = <Offset>[
-      Offset(size.width * 0.02, size.height * 0.80),
-      Offset(size.width * 0.18, size.height * 0.76),
-      Offset(size.width * 0.32, size.height * 0.82),
-      Offset(size.width * 0.46, size.height * 0.78),
-      Offset(size.width * 0.60, size.height * 0.75),
-      Offset(size.width * 0.75, size.height * 0.73),
-      Offset(size.width * 0.90, size.height * 0.70),
-    ];
-
-    if (pointsBlue.isNotEmpty) {
-      bluePath.moveTo(pointsBlue.first.dx, pointsBlue.first.dy);
-      for (var p in pointsBlue.skip(1)) {
-        bluePath.lineTo(p.dx, p.dy);
-      }
-    }
-
-    if (pointsOrange.isNotEmpty) {
-      orangePath.moveTo(pointsOrange.first.dx, pointsOrange.first.dy);
-      for (var p in pointsOrange.skip(1)) {
-        orangePath.lineTo(p.dx, p.dy);
-      }
-    }
-
-    final Paint bluePaint = Paint()
+    final blue = Paint()
       ..color = AppColors.earningsBlue
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    final Paint orangePaint = Paint()
+    final orange = Paint()
       ..color = AppColors.earningsOrangeLine
-      ..strokeWidth = 2.5
+      ..strokeWidth = 2.3
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    canvas.drawPath(orangePath, orangePaint);
-    canvas.drawPath(bluePath, bluePaint);
+    final bluePath = Path();
+    final orangePath = Path();
+
+    final pointsBlue = <Offset>[
+      Offset(size.width * .02, size.height * .78),
+      Offset(size.width * .18, size.height * .70),
+      Offset(size.width * .32, size.height * .62),
+      Offset(size.width * .46, size.height * .50),
+      Offset(size.width * .60, size.height * .38),
+      Offset(size.width * .75, size.height * .30),
+      Offset(size.width * .90, size.height * .34),
+    ];
+
+    final pointsOrange = <Offset>[
+      Offset(size.width * .02, size.height * .82),
+      Offset(size.width * .18, size.height * .78),
+      Offset(size.width * .32, size.height * .86),
+      Offset(size.width * .46, size.height * .82),
+      Offset(size.width * .60, size.height * .79),
+      Offset(size.width * .75, size.height * .77),
+      Offset(size.width * .90, size.height * .74),
+    ];
+
+    bluePath.moveTo(pointsBlue[0].dx, pointsBlue[0].dy);
+    for (final p in pointsBlue.skip(1)) {
+      bluePath.lineTo(p.dx, p.dy);
+    }
+
+    orangePath.moveTo(pointsOrange[0].dx, pointsOrange[0].dy);
+    for (final p in pointsOrange.skip(1)) {
+      orangePath.lineTo(p.dx, p.dy);
+    }
+
+    canvas.drawPath(orangePath, orange);
+    canvas.drawPath(bluePath, blue);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-/// ---------- Completed Referrals Section ----------
 class CompletedReferralsSection extends StatelessWidget {
   final List<ReferralCampaign> campaigns;
 
-  const CompletedReferralsSection({
-    super.key,
-    required this.campaigns,
-  });
+  const CompletedReferralsSection({super.key, required this.campaigns});
 
   @override
   Widget build(BuildContext context) {
@@ -318,14 +408,12 @@ class CompletedReferralsSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        ...campaigns
-            .map(
-              (c) => Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: CompletedReferralCard(campaign: c),
-              ),
-            )
-            .toList(),
+        ...campaigns.map(
+          (c) => Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: CompletedReferralCard(campaign: c),
+          ),
+        ),
       ],
     );
   }
@@ -334,10 +422,7 @@ class CompletedReferralsSection extends StatelessWidget {
 class CompletedReferralCard extends StatelessWidget {
   final ReferralCampaign campaign;
 
-  const CompletedReferralCard({
-    super.key,
-    required this.campaign,
-  });
+  const CompletedReferralCard({super.key, required this.campaign});
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +445,6 @@ class CompletedReferralCard extends StatelessWidget {
 
 class _CampaignHeaderRow extends StatelessWidget {
   final ReferralCampaign campaign;
-
   const _CampaignHeaderRow({required this.campaign});
 
   @override
@@ -410,10 +494,7 @@ class _CampaignMetaRow extends StatelessWidget {
         ),
         Text(
           '${campaign.referrals} referrals',
-          style: const TextStyle(
-            fontSize: 14,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
         ),
       ],
     );
@@ -428,12 +509,12 @@ class _CompletionProgressBar extends StatelessWidget {
     return Container(
       height: 6,
       decoration: BoxDecoration(
-        color: const Color(0xFFFFD4B1), // approx light orange background
+        color: const Color(0xFFFFD4B1),
         borderRadius: BorderRadius.circular(999),
       ),
       child: FractionallySizedBox(
         alignment: Alignment.centerLeft,
-        widthFactor: 1.0, // full bar to indicate completed
+        widthFactor: 1,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.primaryOrange,
@@ -452,32 +533,23 @@ class _CompletionFooterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.check_circle,
-              size: 20,
-              color: AppColors.positiveGreen,
-            ),
-            SizedBox(width: 6),
-            Text(
-              'Completed',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: AppColors.positiveGreen,
-              ),
-            ),
-          ],
+        const Icon(
+          Icons.check_circle,
+          size: 20,
+          color: AppColors.positiveGreen,
+        ),
+        const SizedBox(width: 6),
+        const Text(
+          'Completed',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: AppColors.positiveGreen,
+          ),
         ),
         const Spacer(),
         TextButton(
           onPressed: () {},
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(0, 0),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
           child: const Text(
             'View Details',
             style: TextStyle(
@@ -492,7 +564,6 @@ class _CompletionFooterRow extends StatelessWidget {
   }
 }
 
-/// ---------- View All Earnings Button ----------
 class ViewAllEarningsButton extends StatelessWidget {
   const ViewAllEarningsButton({super.key});
 
@@ -530,10 +601,8 @@ class ViewAllEarningsButton extends StatelessWidget {
   }
 }
 
-/// ---------- Shared Base Card ----------
 class _BaseCard extends StatelessWidget {
   final Widget child;
-
   const _BaseCard({required this.child});
 
   @override
@@ -543,18 +612,14 @@ class _BaseCard extends StatelessWidget {
         color: AppColors.cardBackground,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          // Approx shadow to match UI (light, soft)
           BoxShadow(
-            color: Color(0x26000000), // 15% black
+            color: Color(0x26000000),
             blurRadius: 10,
             offset: Offset(0, 4),
           ),
         ],
       ),
-      child: Padding(
-        padding: AppSpacing.cardPadding,
-        child: child,
-      ),
+      child: Padding(padding: AppSpacing.cardPadding, child: child),
     );
   }
 }
