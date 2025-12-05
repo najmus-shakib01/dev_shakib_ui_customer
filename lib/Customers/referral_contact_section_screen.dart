@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Approx Colors from screenshot
-const Color appPrimaryOrange = Color(0xFFFF6F2C); 
-const Color appYellowCircle = Color(0xFFFFB33A); 
-const Color appLightBackground = Color(0xFFFFFAF1); 
-const Color avatarColor = Color(0xFFF7A81B); 
+const Color appPrimaryOrange = Color(0xFFFF6F2C);
+const Color appYellowCircle = Color(0xFFFFB33A);
+const Color appLightBackground = Color(0xFFFFFAF1);
+const Color avatarColor = Color(0xFFF7A81B);
 const Color borderGray = Color(0xFFE5E5E5);
 
 class ReferralContactSectionScreen extends StatefulWidget {
@@ -48,7 +47,7 @@ class _ReferralContactSectionScreenState
               _allContactsSection(),
               const SizedBox(height: 30),
               _continueButton(),
-              const SizedBox(height: 90), 
+              const SizedBox(height: 90),
             ],
           ),
         ),
@@ -64,8 +63,12 @@ class _ReferralContactSectionScreenState
         shape: BoxShape.circle,
         color: appYellowCircle,
       ),
-      child: const Center(
-        child: Icon(Icons.group, color: Colors.white, size: 40),
+      child: Center(
+        child: Image.asset(
+          "assets/referral_contact_section_screen/icon/contact.png",
+          width: 46,
+          height: 46,
+        ),
       ),
     );
   }
@@ -85,11 +88,7 @@ class _ReferralContactSectionScreenState
         SizedBox(height: 4),
         Text(
           "Step 3 of 3: Choose contacts you'd like to invite",
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: Colors.black87,
-          ),
+          style: TextStyle(fontSize: 15, color: Colors.black87),
           textAlign: TextAlign.center,
         ),
       ],
@@ -143,9 +142,9 @@ class _ReferralContactSectionScreenState
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: borderGray),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Expanded(
+          const Expanded(
             child: TextField(
               decoration: InputDecoration(
                 hintText: "Search contact",
@@ -153,7 +152,11 @@ class _ReferralContactSectionScreenState
               ),
             ),
           ),
-          Icon(Icons.search, size: 24, color: Colors.grey),
+          Image.asset(
+            "assets/referral_contact_section_screen/icon/search.png",
+            width: 22,
+            height: 22,
+          ),
         ],
       ),
     );
@@ -212,23 +215,21 @@ class _ReferralContactSectionScreenState
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 15),
-          ...recentContacts
-              .map(
-                (c) => Column(
-                  children: [
-                    ContactTile(
-                      contact: c,
-                      onChanged: (value) {
-                        setState(() {
-                          c.selected = value;
-                        });
-                      },
-                    ),
-                    const Divider(height: 20, color: borderGray),
-                  ],
+          ...recentContacts.map(
+            (c) => Column(
+              children: [
+                ContactTile(
+                  contact: c,
+                  onChanged: (value) {
+                    setState(() {
+                      c.selected = value;
+                    });
+                  },
                 ),
-              )
-              .toList(),
+                const Divider(height: 20, color: borderGray),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -246,10 +247,7 @@ class _ReferralContactSectionScreenState
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "No contacts yet",
-            style: TextStyle(color: Colors.grey, fontSize: 15),
-          ),
+          const Text("No contacts yet", style: TextStyle(color: Colors.grey)),
           const SizedBox(height: 18),
           _outlinedButton("Import New Contacts"),
         ],
@@ -297,28 +295,50 @@ class _ReferralContactSectionScreenState
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _navItem(Icons.home_outlined, "Home", false),
-            _navItem(Icons.group_outlined, "Leaderboard", false),
-
+            _navItem(
+              "assets/referral_contact_section_screen/icon/home.png",
+              "Home",
+              false,
+            ),
+            _navItem(
+              "assets/referral_contact_section_screen/icon/leaderboard.png",
+              "Leaderboard",
+              false,
+            ),
             _activeReferItem(),
-
-            _navItem(Icons.account_balance_wallet_outlined, "Earnings", false),
-            _navItem(Icons.person_outline, "Profile", false),
+            _navItem(
+              "assets/referral_contact_section_screen/icon/earnings.png",
+              "Earnings",
+              false,
+            ),
+            _navItem(
+              "assets/referral_contact_section_screen/icon/profile.png",
+              "Profile",
+              false,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _navItem(IconData icon, String label, bool active) {
+  Widget _navItem(String iconPath, String label, bool active) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 28, color: Colors.black87),
+        Image.asset(
+          iconPath,
+          width: 28,
+          height: 28,
+          color: active ? appPrimaryOrange : null,
+        ),
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(fontSize: 13, color: Colors.black87),
+          style: TextStyle(
+            fontSize: 13,
+            color: active ? appPrimaryOrange : Colors.black87,
+          ),
         ),
       ],
     );
@@ -332,10 +352,16 @@ class _ReferralContactSectionScreenState
           width: 48,
           height: 48,
           decoration: const BoxDecoration(
-            shape: BoxShape.circle,
             color: appYellowCircle,
+            shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.person_add, color: Colors.white, size: 26),
+          child: Center(
+            child: Image.asset(
+              "assets/referral_contact_section_screen/icon/refer.png",
+              width: 28,
+              height: 28,
+            ),
+          ),
         ),
         const SizedBox(height: 4),
         const Text(
@@ -400,9 +426,9 @@ class ContactTile extends StatelessWidget {
         child: Text(
           contact.initials,
           style: const TextStyle(
-            color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w700,
+            color: Colors.black,
           ),
         ),
       ),
@@ -415,20 +441,12 @@ class ContactTile extends StatelessWidget {
       children: [
         Text(
           contact.name,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 3),
         Text(
           contact.phone,
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: Colors.black54,
-          ),
+          style: const TextStyle(fontSize: 15, color: Colors.black54),
         ),
       ],
     );

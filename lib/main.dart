@@ -2,8 +2,8 @@
 // import 'package:dev_shakib_ui/Customers/Terms_Service.dart';
 // import 'package:dev_shakib_ui/Customers/onboarding_screen.dart';
 // import 'package:dev_shakib_ui/Customers/profile_completion_form.dart';
-import 'package:dev_shakib_ui/Customers/stripe_connect_payment_setup.dart';
-// import 'package:dev_shakib_ui/Customers/referral_contact_section_screen.dart';
+// import 'package:dev_shakib_ui/Customers/stripe_connect_payment_setup.dart';
+import 'package:dev_shakib_ui/Customers/referral_contact_section_screen.dart';
 // import 'package:dev_shakib_ui/Customers/referral_composition_screen.dart';
 // import 'package:dev_shakib_ui/Customers/referral_preview_and_send_screen.dart';
 // import 'package:dev_shakib_ui/Customers/help_and_FAQ_screen.dart';
@@ -28,8 +28,8 @@ class ReferableApp extends StatelessWidget {
       // home: const TermsOfServiceScreen(),
       // home: const OnboardingScreen(),
       // home: const ProfileCompletionForm(),
-      home: const StripeConnectPaymentSetupScreen(),
-      // home: const ReferralContactSectionScreen(),
+      // home: const StripeConnectPaymentSetupScreen(),
+      home: const ReferralContactSectionScreen(),
       // home: const ReferralCompositionScreen(),
       // home: const ReferralPreviewAndSendScreen(),
       // home: const HelpAndFaqScreen(),
