@@ -13,7 +13,37 @@ class _HelpAndFaqScreenState extends State<HelpAndFaqScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFDF4), 
+      backgroundColor: const Color(0xFFFFFDF4),
+
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(72),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8F4E9),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black.withOpacity(0.12),
+                width: 1,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "assets/help_and_FAQ_screen/image/referable_logo.png",
+                height: 32,
+              ),
+              Image.asset(
+                "assets/help_and_FAQ_screen/icon/menu.png",
+                height: 26,
+              ),
+            ],
+          ),
+        ),
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -43,11 +73,69 @@ class _HelpAndFaqScreenState extends State<HelpAndFaqScreen> {
           ),
         ),
       ),
+
+      bottomNavigationBar: Container(
+        height: 88,
+        padding: const EdgeInsets.only(top: 6),
+        decoration: const BoxDecoration(color: Colors.white),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _navItem("assets/help_and_FAQ_screen/icon/home.png", "Home"),
+              _navItem("assets/help_and_FAQ_screen/icon/leaderboard.png", "Leaderboard"),
+              _activeReferItem(),
+              _navItem("assets/help_and_FAQ_screen/icon/earnings.png", "Earnings"),
+              _navItem("assets/help_and_FAQ_screen/icon/profile.png", "Profile"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(String icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(icon, height: 26),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(fontSize: 12, color: Colors.black87)),
+      ],
+    );
+  }
+
+  Widget _activeReferItem() {
+    return Column(
+      children: [
+        Container(
+          height: 52,
+          width: 52,
+          decoration: const BoxDecoration(
+            color: Color(0xFFFFC44D),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Image.asset(
+              "assets/help_and_FAQ_screen/icon/refer.png",
+              height: 24,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          "Refer",
+          style: TextStyle(fontSize: 12, color: Colors.black87),
+        )
+      ],
     );
   }
 }
 
-
+// -------------------------
+// Header Section
+// -------------------------
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
 
@@ -56,10 +144,7 @@ class HeaderSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        Text(
-          "Help & FAQ",
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        ),
+        Text("Help & FAQ", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
         SizedBox(height: 6),
         Text(
           "Find answers to common questions & get support",
@@ -70,6 +155,9 @@ class HeaderSection extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Search Box
+// -------------------------
 class SearchBox extends StatelessWidget {
   const SearchBox({super.key});
 
@@ -86,10 +174,7 @@ class SearchBox extends StatelessWidget {
       child: Row(
         children: const [
           Expanded(
-            child: Text(
-              "Search for help topics",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
+            child: Text("Search for help topics", style: TextStyle(fontSize: 16, color: Colors.grey)),
           ),
           Icon(Icons.search, color: Colors.grey),
         ],
@@ -98,6 +183,9 @@ class SearchBox extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Popular Topics Wrapper
+// -------------------------
 class PopularTopicsWrapper extends StatelessWidget {
   const PopularTopicsWrapper({super.key});
 
@@ -110,7 +198,7 @@ class PopularTopicsWrapper extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08), 
+            color: Colors.black.withOpacity(0.08),
             blurRadius: 12,
             offset: const Offset(0, 4),
           )
@@ -121,6 +209,9 @@ class PopularTopicsWrapper extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Popular Topics Section
+// -------------------------
 class PopularTopicsSection extends StatelessWidget {
   const PopularTopicsSection({super.key});
 
@@ -129,50 +220,46 @@ class PopularTopicsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Popular Topics",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
+        const Text("Popular Topics", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 18),
+
         Row(
           children: const [
             Expanded(
               child: TopicBox(
                 title: "Stripe Setup",
-                icon: Icons.credit_card,
+                imagePath: "assets/help_and_FAQ_screen/icon/stripe.png",
                 bgColor: Color(0xFFFFF3D6),
-                iconColor: Color(0xFFF3B500),
               ),
             ),
             SizedBox(width: 15),
             Expanded(
               child: TopicBox(
                 title: "Track Referrals",
-                icon: Icons.assessment,
+                imagePath: "assets/help_and_FAQ_screen/icon/track.png",
                 bgColor: Color(0xFFF5ECFF),
-                iconColor: Color(0xFFBC7DF3),
               ),
             ),
           ],
         ),
+
         const SizedBox(height: 15),
+
         Row(
           children: const [
             Expanded(
               child: TopicBox(
                 title: "Payment",
-                icon: Icons.monetization_on,
+                imagePath: "assets/help_and_FAQ_screen/icon/payment.png",
                 bgColor: Color(0xFFFFE6E0),
-                iconColor: Color(0xFFE25940),
               ),
             ),
             SizedBox(width: 15),
             Expanded(
               child: TopicBox(
                 title: "Invite Friends",
-                icon: Icons.group,
+                imagePath: "assets/help_and_FAQ_screen/icon/invite.png",
                 bgColor: Color(0xFFFFEAEA),
-                iconColor: Color(0xFFE9606E),
               ),
             ),
           ],
@@ -182,18 +269,19 @@ class PopularTopicsSection extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Topic Box with Image
+// -------------------------
 class TopicBox extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String imagePath;
   final Color bgColor;
-  final Color iconColor;
 
   const TopicBox({
     super.key,
     required this.title,
-    required this.icon,
+    required this.imagePath,
     required this.bgColor,
-    required this.iconColor,
   });
 
   @override
@@ -205,27 +293,32 @@ class TopicBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: Colors.black12),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 23,
-              backgroundColor: bgColor,
-              child: Icon(icon, color: iconColor, size: 26),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              color: bgColor,
+              shape: BoxShape.circle,
             ),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Image.asset(imagePath),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+          Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+        ],
       ),
     );
   }
 }
 
+// -------------------------
+// FAQ Section
+// -------------------------
 class FaqSection extends StatelessWidget {
   final List<bool> expandState;
   final Function(int) onToggle;
@@ -250,65 +343,42 @@ class FaqSection extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(left: 16, top: 8, bottom: 10),
-            child: Text(
-              "Frequently Asked Questions",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Text("Frequently Asked Questions",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
 
-          _faqItem(
-            index: 0,
-            title: "How do I set up my Stripe account?",
-            expanded: expandState[0],
-          ),
-          _faqItem(
-            index: 1,
-            title: "Where can I see my referral status?",
-            expanded: expandState[1],
-          ),
-          _faqItem(
-            index: 2,
-            title: "When will I receive my referral payments?",
-            expanded: expandState[2],
-          ),
-          _faqItem(
-            index: 3,
-            title: "How do I change my profile information?",
-            expanded: expandState[3],
-          ),
+          _faqItem(index: 0, title: "How do I set up my Stripe account?", expanded: expandState[0]),
+          _faqItem(index: 1, title: "Where can I see my referral status?", expanded: expandState[1]),
+          _faqItem(index: 2, title: "When will I receive my referral payments?", expanded: expandState[2]),
+          _faqItem(index: 3, title: "How do I change my profile information?", expanded: expandState[3]),
         ],
       ),
     );
   }
 
-  Widget _faqItem({required int index, required String title, required bool expanded}) {
-    const Color arrowColor = Color(0xFFFFA84C); 
-
+  Widget _faqItem({
+    required int index,
+    required String title,
+    required bool expanded,
+  }) {
     return Column(
       children: [
         ListTile(
-          title: Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
+          title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           trailing: Icon(
             expanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-            color: arrowColor,
+            color: const Color(0xFFFFA84C),
             size: 28,
           ),
           onTap: () => onToggle(index),
         ),
 
         if (expanded)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(
-              "This is example expanded content for: $title",
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text("This is example expanded content.",
+                style: TextStyle(fontSize: 14, color: Colors.black87)),
           ),
 
         Divider(height: 1, color: Colors.grey.shade300),
@@ -317,6 +387,9 @@ class FaqSection extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Need More Help Section
+// -------------------------
 class SupportContactBox extends StatelessWidget {
   const SupportContactBox({super.key});
 
@@ -332,10 +405,13 @@ class SupportContactBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
-              Icon(Icons.support_agent, size: 30, color: Colors.orange),
-              SizedBox(width: 10),
-              Text(
+            children: [
+              Image.asset(
+                "assets/help_and_FAQ_screen/icon/support.png",
+                height: 34,
+              ),
+              const SizedBox(width: 10),
+              const Text(
                 "Need more help?",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -357,10 +433,7 @@ class SupportContactBox extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
-              child: const Text(
-                "Contact Support",
-                style: TextStyle(color: Color(0xFFFFFFFF)),
-              ),
+              child: const Text("Contact Support", style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
@@ -369,6 +442,9 @@ class SupportContactBox extends StatelessWidget {
   }
 }
 
+// -------------------------
+// Back Button Section
+// -------------------------
 class BackButtonSection extends StatelessWidget {
   const BackButtonSection({super.key});
 
