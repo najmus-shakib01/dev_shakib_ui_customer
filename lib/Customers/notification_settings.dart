@@ -22,6 +22,70 @@ class _NotificationSettingsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F5EE),
+
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(75),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFFAF6ED),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black.withOpacity(0.12),
+                width: 1,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "assets/notification_settings/image/referable_logo.png",
+                height: 33,
+              ),
+              Image.asset(
+                "assets/notification_settings/icon/menu.png",
+                height: 28,
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      bottomNavigationBar: Container(
+        height: 90,
+        decoration: const BoxDecoration(color: Colors.white),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _navItem(
+                "assets/notification_settings/icon/home.png",
+                "Home",
+                false,
+              ),
+              _navItem(
+                "assets/notification_settings/icon/leaderboard.png",
+                "Leaderboard",
+                false,
+              ),
+              _activeReferItem(),
+              _navItem(
+                "assets/notification_settings/icon/earnings.png",
+                "Earnings",
+                false,
+              ),
+              _navItem(
+                "assets/notification_settings/icon/profile.png",
+                "Profile",
+                false,
+              ),
+            ],
+          ),
+        ),
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,16 +141,23 @@ class _NotificationSettingsScreenState
                     onChanged: (val) => setState(() => quietHours = val),
                   ),
 
-                  const Padding(
-                    padding: EdgeInsets.only(top: 12, bottom: 6),
-                    child: Text(
-                      "Start Time",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                  const _DashedDivider(),
+                  const SizedBox(height: 12),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Start Time",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
+                      _TimeLabel(hour: startHour),
+                    ],
                   ),
+
                   Slider(
                     min: 0,
                     max: 23,
@@ -97,14 +168,24 @@ class _NotificationSettingsScreenState
                         ? (val) => setState(() => startHour = val)
                         : null,
                   ),
-                  _TimeLabel(hour: startHour),
 
-                  const SizedBox(height: 10),
+                  const _DashedDivider(),
+                  const SizedBox(height: 12),
 
-                  const Text(
-                    "End Time",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "End Time",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      _TimeLabel(hour: endHour),
+                    ],
                   ),
+
                   Slider(
                     min: 0,
                     max: 23,
@@ -115,7 +196,6 @@ class _NotificationSettingsScreenState
                         ? (val) => setState(() => endHour = val)
                         : null,
                   ),
-                  _TimeLabel(hour: endHour),
                 ],
               ),
 
@@ -149,6 +229,41 @@ class _NotificationSettingsScreenState
               const SizedBox(height: 40),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(String iconPath, String label, bool active) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(height: 8),
+        Image.asset(iconPath, height: 28),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: active ? Colors.orange : Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _activeReferItem() {
+    return Container(
+      height: 62,
+      width: 62,
+      decoration: const BoxDecoration(
+        color: Color(0xFFF5A623),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Image.asset(
+          "assets/notification_settings/icon/refer.png",
+          height: 30,
         ),
       ),
     );
@@ -270,6 +385,35 @@ class _TimeLabel extends StatelessWidget {
     return Text(
       "${displayHour.toString().padLeft(2, '0')}:00 $period",
       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class _DashedDivider extends StatelessWidget {
+  const _DashedDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double dashWidth = 6;
+        double dashSpace = 6;
+        int dashCount = (constraints.maxWidth / (dashWidth + dashSpace))
+            .floor();
+
+        return Row(
+          children: List.generate(dashCount, (_) {
+            return Padding(
+              padding: EdgeInsets.only(right: dashSpace),
+              child: Container(
+                width: dashWidth,
+                height: 1.2,
+                color: Colors.grey.shade300,
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }

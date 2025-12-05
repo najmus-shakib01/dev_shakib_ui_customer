@@ -39,3 +39,5 @@ flutter:
     - assets/referral_preview_and_send_screen/image/
     - assets/help_and_FAQ_screen/icon/
     - assets/help_and_FAQ_screen/image/
+    - assets/notification_settings/icon/
+    - assets/notification_settings/image/
