@@ -54,8 +54,8 @@ A new Flutter project.
 A new Flutter project.
 
 ## Output
-<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/1e867932-8a48-4ec1-a6d1-cccdf925c1eb" />
-<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/1b7f17aa-2072-46f5-8ebf-d85ddb9a653e" />
+<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/17004260-7c11-4119-ad7a-0df0adeeeae7" />
+<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/46f9c262-cffd-446d-93b6-2e71c2662fab" />
 
 # Referral Preview And Send Screen
 
