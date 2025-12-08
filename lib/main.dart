@@ -9,10 +9,11 @@
 // import 'package:dev_shakib_ui/Customers/help_and_FAQ_screen.dart';
 // import 'package:dev_shakib_ui/Customers/notification_settings.dart';
 // import 'package:dev_shakib_ui/Customers/company_insight.dart';
+import 'package:dev_shakib_ui/Customers/referral_earnings_dashboard.dart';
 // import 'package:dev_shakib_ui/Customers/company_selection.dart';
 // import 'package:dev_shakib_ui/Customers/company_single_screen.dart';
 // import 'package:dev_shakib_ui/Customers/referral_tracking_deshboard.dart';
-import 'package:dev_shakib_ui/Customers/referral_details_screen.dart';
+// import 'package:dev_shakib_ui/Customers/referral_details_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,10 +39,11 @@ class ReferableApp extends StatelessWidget {
       // home: const HelpAndFaqScreen(),
       // home: const NotificationSettingsScreen(),
       // home: const CompanyInsightPage(),
+      home: const ReferralEarningsDashboard(),
       // home: const CompanySelection(),
       // home: const CompanySingleScreen(),
       // home: const ReferralTrackingDeshboard(),
-      home: const ReferralDetailsScreen(),
+      // home: const ReferralDetailsScreen(),
     );
   }
 }
