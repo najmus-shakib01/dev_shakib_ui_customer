@@ -84,8 +84,8 @@ class AppTextStyles {
 
 enum CompanyStatus { active, pending }
 
-class ReferralEarningsDashboardScreen extends StatelessWidget {
-  const ReferralEarningsDashboardScreen({super.key});
+class CompanySelection extends StatelessWidget {
+  const CompanySelection({super.key});
 
   @override
   Widget build(BuildContext context) {

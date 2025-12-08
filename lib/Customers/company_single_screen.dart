@@ -79,8 +79,8 @@ class AppTextStyles {
   );
 }
 
-class ReferralEarningsDashboardPage extends StatelessWidget {
-  const ReferralEarningsDashboardPage({super.key});
+class CompanySingleScreen extends StatelessWidget {
+  const CompanySingleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
