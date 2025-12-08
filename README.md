@@ -116,3 +116,12 @@ A new Flutter project.
 ## Output
 <img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/772c63f1-cf74-41b3-a001-66f63592e310" />
 <img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/c5adfd46-f797-4e92-b6fb-d7b4c7252c89" />
+
+# Referral Details Screen
+
+A new Flutter project.
+
+## Output
+<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/cd863500-2a92-4f2a-ad2a-79c7da1258db" />
+<img width="412" height="836" alt="image" src="https://github.com/user-attachments/assets/362b8f73-be04-400e-b403-eb6ec548cdb4" />
+
